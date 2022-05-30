@@ -45,17 +45,14 @@ def symulator_ataku(n,q):
             adw_counter += 1
         else:
             ucz_counter += 1
-    if n!=0:
+    while ucz_counter - adw_counter < 100:
         if adw_counter >= ucz_counter:
             return 1 # atak sie powiodl
-    while ucz_counter - adw_counter < 100:
         x = random.random()
         if x <= q:
             adw_counter += 1
         else:
             ucz_counter += 1
-        if adw_counter >= ucz_counter:
-            return 1 # atak sie powiodl
     return 0 # atak sie nie powiodl
 
 # wykres prawdop. ataku w zaleznosci od q przy ustalonym n
@@ -73,7 +70,7 @@ plt.show()
 
 # wykres prawdop. ataku w zaleznosci od n przy ustalonym q
 q = 0.3
-for n in range(0, 11):
+for n in range(1, 11):
     counter=0
     for i in range(0,10000):
         counter += symulator_ataku(n,q)
