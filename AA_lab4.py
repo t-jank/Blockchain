@@ -10,7 +10,7 @@ k = 2 # ile adwersarz zbudowal, gdy uczciwy zbudowal n, k<n
 
 def Newton(a,b):
     return math.factorial(a) / (math.factorial(b) * math.factorial(a-b))
-
+'''
 ####### podpunkt a1 #######
 n = 12 # 1,3,6,12,24,48
 for q in np.arange(0.02, 0.5, 0.02):
@@ -32,7 +32,7 @@ plt.title('P')
 
 plt.legend()
 plt.show()
-
+'''
 
 ########## podpunkt b ###########
 
@@ -45,23 +45,44 @@ def symulator_ataku(n,q):
             adw_counter += 1
         else:
             ucz_counter += 1
-    while ucz_counter - adw_counter < 100:
+    if n!=0:
         if adw_counter >= ucz_counter:
             return 1 # atak sie powiodl
+    while ucz_counter - adw_counter < 100:
         x = random.random()
         if x <= q:
             adw_counter += 1
         else:
             ucz_counter += 1
+        if adw_counter >= ucz_counter:
+            return 1 # atak sie powiodl
     return 0 # atak sie nie powiodl
 
-counter=0
+# wykres prawdop. ataku w zaleznosci od q przy ustalonym n
 n = 6
-q = 0.3
-for i in range(0,10000):
-    counter += symulator_ataku(n,q)
-P_ataku = counter/100
-print('n = ',n,'\nq = ',q,'\nPrawdopodobienstwo skutecznego ataku: ',P_ataku,'%.',sep='')
+for q in np.arange(0.0, 0.55, 0.02):
+    counter=0
+    for i in range(0,10000):
+        counter += symulator_ataku(n,q)
+    P_ataku = counter/100
+    plt.plot(q,P_ataku, color='b', marker='.')
+plt.xlabel('q')
+plt.ylabel('Prawdopodobienstwo skutecznego ataku [%]')
+plt.title('n = 6')
+plt.show()
 
-# warto tutaj zrobic wykres P ataku w zaleznosci od q przy ustalonych n (kilka wykresow); to proste :)
+# wykres prawdop. ataku w zaleznosci od n przy ustalonym q
+q = 0.3
+for n in range(0, 11):
+    counter=0
+    for i in range(0,10000):
+        counter += symulator_ataku(n,q)
+    P_ataku = counter/100
+    plt.plot(n,P_ataku, color='b', marker='.')
+plt.xlabel('n')
+plt.ylabel('Prawdopodobienstwo skutecznego ataku [%]')
+plt.title('q = 0.3')
+plt.show()
+
+#print('n = ',n,'\nq = ',q,'\nPrawdopodobienstwo skutecznego ataku: ',P_ataku,'%.',sep='')
 
