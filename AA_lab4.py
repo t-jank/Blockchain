@@ -54,7 +54,7 @@ def symulator_ataku(n,q):
         else:
             ucz_counter += 1
     return 0 # atak sie nie powiodl
-
+'''
 # wykres prawdop. ataku w zaleznosci od q przy ustalonym n
 n = 6
 for q in np.arange(0.0, 0.55, 0.02):
@@ -67,7 +67,7 @@ plt.xlabel('q')
 plt.ylabel('Prawdopodobienstwo skutecznego ataku [%]')
 plt.title('n = 6')
 plt.show()
-
+'''
 # wykres prawdop. ataku w zaleznosci od n przy ustalonym q
 q = 0.3
 for n in range(1, 11):
@@ -78,7 +78,8 @@ for n in range(1, 11):
     plt.plot(n,P_ataku, color='b', marker='.')
 plt.xlabel('n')
 plt.ylabel('Prawdopodobienstwo skutecznego ataku [%]')
-plt.title('q = 0.3')
+plt.title('Symulator ataku "double spending": wykres P(n), q = 0.3')
+plt.ylim([0,100])
 plt.show()
 
 #print('n = ',n,'\nq = ',q,'\nPrawdopodobienstwo skutecznego ataku: ',P_ataku,'%.',sep='')
