@@ -10,10 +10,28 @@ k = 2 # ile adwersarz zbudowal, gdy uczciwy zbudowal n, k<n
 
 def Newton(a,b):
     return math.factorial(a) / (math.factorial(b) * math.factorial(a-b))
-'''
+
+def Grunspan(n,q):
+    p = 1-q
+    sumgrun = 0
+    for k in range(0,n-1):
+        sumgrun += (p**n * q**k - q**n * p**k) * Newton(k+n-1,k)
+    PGrunspan = 1 - sumgrun
+    return PGrunspan
+
+def Nakamoto(n,q):
+    p = 1-q
+    lamdba = n*q/p
+    sumnak = 0
+    for k in range(0,n-1):
+        sumnak += math.exp(-lamdba)*(lamdba**k)/math.factorial(k)*(1-q)
+    PNakamoto = 1 - sumnak
+    return PNakamoto
+
 ####### podpunkt a1 #######
-n = 12 # 1,3,6,12,24,48
-for q in np.arange(0.02, 0.5, 0.02):
+n = 6 # 1,3,6,12,24,48
+for q in np.arange(0, 0.51, 0.01):
+    p = 1-q
     lamdba = n*q/p
     sumnak = 0
     sumgrun = 0
@@ -21,18 +39,18 @@ for q in np.arange(0.02, 0.5, 0.02):
         sumnak += math.exp(-lamdba)*(lamdba**k)/math.factorial(k)*(1-q)
         sumgrun += (p**n * q**k - q**n * p**k) * Newton(k+n-1,k)
     PNakamoto = 1 - sumnak
-    P = (q/p)**(n-k)
+    #P = (q/p)**(n-k)
     PGrunspan = 1 - sumgrun
-    plt.plot(q,PNakamoto, color='b', marker='.', label='Nakamoto' if q == 0.02 else "")
+    plt.plot(q,PNakamoto, color='orange', marker='.', label='Nakamoto' if q == 0.02 else "")
     plt.plot(q,PGrunspan, color='g', marker='.', label='Grunspan' if q == 0.02 else "")
-    plt.plot(q,P, color='orange', marker='.', label='P' if q == 0.02 else "")
+    #plt.plot(q,P, color='b', marker='.', label='P' if q == 0.02 else "")
 plt.xlabel('q')
 plt.ylabel('P')
-plt.title('P')
+plt.title('Porownanie analiz ataku double spending, n=1')
 
 plt.legend()
 plt.show()
-'''
+
 
 ########## podpunkt b ###########
 
@@ -57,7 +75,7 @@ def symulator_ataku(n,q):
 '''
 # wykres prawdop. ataku w zaleznosci od q przy ustalonym n
 n = 6
-for q in np.arange(0.0, 0.55, 0.02):
+for q in np.arange(0.0, 0.55, 0.01):
     counter=0
     for i in range(0,10000):
         counter += symulator_ataku(n,q)
@@ -67,6 +85,7 @@ plt.xlabel('q')
 plt.ylabel('Prawdopodobienstwo skutecznego ataku [%]')
 plt.title('n = 6')
 plt.show()
+'''
 '''
 # wykres prawdop. ataku w zaleznosci od n przy ustalonym q
 q = 0.3
@@ -81,6 +100,6 @@ plt.ylabel('Prawdopodobienstwo skutecznego ataku [%]')
 plt.title('Symulator ataku "double spending": wykres P(n), q = 0.3')
 plt.ylim([0,100])
 plt.show()
-
+'''
 #print('n = ',n,'\nq = ',q,'\nPrawdopodobienstwo skutecznego ataku: ',P_ataku,'%.',sep='')
 
