@@ -31,22 +31,12 @@ def Nakamoto(n,q):
 ####### podpunkt a1 #######
 n = 6 # 1,3,6,12,24,48
 for q in np.arange(0, 0.51, 0.01):
-    p = 1-q
-    lamdba = n*q/p
-    sumnak = 0
-    sumgrun = 0
-    for k in range(0,n-1):
-        sumnak += math.exp(-lamdba)*(lamdba**k)/math.factorial(k)*(1-q)
-        sumgrun += (p**n * q**k - q**n * p**k) * Newton(k+n-1,k)
-    PNakamoto = 1 - sumnak
-    #P = (q/p)**(n-k)
-    PGrunspan = 1 - sumgrun
-    plt.plot(q,PNakamoto, color='orange', marker='.', label='Nakamoto' if q == 0.02 else "")
-    plt.plot(q,PGrunspan, color='g', marker='.', label='Grunspan' if q == 0.02 else "")
+    plt.plot(q,Nakamoto(n,q), color='orange', marker='.', label='Nakamoto' if q == 0.02 else "")
+    plt.plot(q,Grunspan(n,q), color='g', marker='.', label='Grunspan' if q == 0.02 else "")
     #plt.plot(q,P, color='b', marker='.', label='P' if q == 0.02 else "")
 plt.xlabel('q')
 plt.ylabel('P')
-plt.title('Porownanie analiz ataku double spending, n=1')
+plt.title('Porownanie analiz ataku double spending, n=6')
 
 plt.legend()
 plt.show()
