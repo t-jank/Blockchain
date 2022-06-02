@@ -28,22 +28,6 @@ def Nakamoto(n,q):
     PNakamoto = 1 - sumnak
     return PNakamoto
 
-####### podpunkt a1 #######
-n = 6 # 1,3,6,12,24,48
-for q in np.arange(0, 0.51, 0.01):
-    plt.plot(q,Nakamoto(n,q), color='orange', marker='.', label='Nakamoto' if q == 0.02 else "")
-    plt.plot(q,Grunspan(n,q), color='g', marker='.', label='Grunspan' if q == 0.02 else "")
-    #plt.plot(q,P, color='b', marker='.', label='P' if q == 0.02 else "")
-plt.xlabel('q')
-plt.ylabel('P')
-plt.title('Porownanie analiz ataku double spending, n=6')
-
-plt.legend()
-plt.show()
-
-
-########## podpunkt b ###########
-
 def symulator_ataku(n,q):
     adw_counter=0
     ucz_counter=0 # liczba wykopanych blokow przez adwersarza i uczwiwe wezly
@@ -62,20 +46,37 @@ def symulator_ataku(n,q):
         else:
             ucz_counter += 1
     return 0 # atak sie nie powiodl
+
+####### podpunkt a1 #######
 '''
+n = 6 # 1,3,6,12,24,48
+for q in np.arange(0, 0.51, 0.01):
+    plt.plot(q,Nakamoto(n,q), color='orange', marker='.', label='Nakamoto' if q == 0 else "")
+    plt.plot(q,Grunspan(n,q), color='g', marker='.', label='Grunspan' if q == 0 else "")
+    #plt.plot(q,P, color='b', marker='.', label='P' if q == 0.02 else "")
+plt.xlabel('q')
+plt.ylabel('P')
+plt.title('Porownanie analiz ataku double spending, n='+str(n))
+plt.legend()
+plt.show()
+'''
+########## podpunkt b ###########
 # wykres prawdop. ataku w zaleznosci od q przy ustalonym n
 n = 6
-for q in np.arange(0.0, 0.55, 0.01):
+for q in np.arange(0, 0.51, 0.01):
     counter=0
     for i in range(0,10000):
         counter += symulator_ataku(n,q)
     P_ataku = counter/100
-    plt.plot(q,P_ataku, color='b', marker='.')
+    plt.plot(q,P_ataku, color='blue', marker='.', label='symulacja' if q == 0 else "")
+    plt.plot(q,Nakamoto(n,q)*100, color='orangered', marker='.', label='Nakamoto' if q == 0 else "")
+    plt.plot(q,Grunspan(n,q)*100, color='springgreen', marker='.', label='Grunspan' if q == 0 else "")
 plt.xlabel('q')
 plt.ylabel('Prawdopodobienstwo skutecznego ataku [%]')
-plt.title('n = 6')
+plt.title('n = '+str(n))
+plt.legend()
 plt.show()
-'''
+
 '''
 # wykres prawdop. ataku w zaleznosci od n przy ustalonym q
 q = 0.3
@@ -87,7 +88,7 @@ for n in range(1, 11):
     plt.plot(n,P_ataku, color='b', marker='.')
 plt.xlabel('n')
 plt.ylabel('Prawdopodobienstwo skutecznego ataku [%]')
-plt.title('Symulator ataku "double spending": wykres P(n), q = 0.3')
+plt.title('Symulator ataku "double spending": wykres P(n), q = '+str(q))
 plt.ylim([0,100])
 plt.show()
 '''
