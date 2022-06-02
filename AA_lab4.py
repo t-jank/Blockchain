@@ -3,7 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import random
 
-
 def Newton(a,b):
     return math.factorial(a) / (math.factorial(b) * math.factorial(a-b))
 
@@ -44,10 +43,10 @@ def symulator_ataku(n,q):
     return 0 # atak sie nie powiodl
 
 ####### podpunkt a1 #######
-
+'''
 n = 6 # 1,3,6,12,24,48
 for q in np.arange(0, 0.51, 0.01):
-    plt.plot(q,Nakamoto(n,q), color='orange', marker='.', label='Nakamoto' if q==0 else "")
+    plt.plot(q,Nakamoto(n,q), color='orangered', marker='.', label='Nakamoto' if q==0 else "")
     plt.plot(q,Grunspan(n,q), color='g', marker='.', label='Grunspan' if q==0 else "")
 plt.xlabel('q')
 plt.ylabel('P')
@@ -56,22 +55,6 @@ plt.legend()
 plt.show()
 '''
 ########## podpunkt b ###########
-# wykres prawdop. ataku w zaleznosci od q przy ustalonym n
-n = 1
-for q in np.arange(0, 0.51, 0.01):
-    counter=0
-    for i in range(0,10000):
-        counter += symulator_ataku(n,q)
-    P_ataku = counter/100
-    plt.plot(q,P_ataku, color='blue', marker='.', label='symulacja' if q==0 else "")
-    plt.plot(q,Nakamoto(n,q)*100, color='orangered', marker='.', label='Nakamoto' if q==0 else "")
-    plt.plot(q,Grunspan(n,q)*100, color='springgreen', marker='.', label='Grunspan' if q==0 else "")
-plt.xlabel('q')
-plt.ylabel('Prawdopodobienstwo skutecznego ataku [%]')
-plt.title('n = '+str(n))
-plt.legend()
-plt.show()
-'''
 '''
 # wykres prawdop. ataku w zaleznosci od n przy ustalonym q
 q = 0.3
@@ -87,5 +70,19 @@ plt.title('Symulator ataku "double spending": wykres P(n), q = '+str(q))
 plt.ylim([0,100])
 plt.show()
 '''
-#print('n = ',n,'\nq = ',q,'\nPrawdopodobienstwo skutecznego ataku: ',P_ataku,'%.',sep='')
-
+########## podbunkt c ##########
+# wykresy prawdop. ataku w zaleznosci od q przy ustalonym n, porownanie analiz i symulacji
+n = 6
+for q in np.arange(0, 0.51, 0.01):
+    counter=0
+    for i in range(0,10000):
+        counter += symulator_ataku(n,q)
+    P_ataku = counter/100
+    plt.plot(q,P_ataku, color='blue', marker='o', label='symulacja' if q==0 else "")
+    plt.plot(q,Nakamoto(n,q)*100, color='orangered', marker='*', label='Nakamoto' if q==0 else "")
+    plt.plot(q,Grunspan(n,q)*100, color='springgreen', marker='.', label='Grunspan' if q==0 else "")
+plt.xlabel('q')
+plt.ylabel('Prawdopodobienstwo skutecznego ataku [%]')
+plt.title('Atak double spending. Porownanie analiz i symulacji. P(q), n='+str(n))
+plt.legend()
+plt.show()
