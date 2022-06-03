@@ -56,8 +56,9 @@ plt.show()
 '''
 
 ######### podpunkt a2 #########
-P = 0.1 # 0.001, 0.01, 0.1
-for q in np.arange(0, 0.45, 0.01):
+'''
+P = 0.01 # 0.001, 0.01, 0.1
+for q in np.arange(0, 0.41, 0.01):
     for n in range(1,150):
         if Grunspan(n,q) < P:
             plt.plot(q,n, color='g', marker='.', label='Grunspan' if q==0 else "")
@@ -68,9 +69,11 @@ for q in np.arange(0, 0.45, 0.01):
             break
 plt.xlabel('q')
 plt.ylabel('n')
+plt.ylim([0,60])
 plt.title('P(n,q) = '+str(P*100)+'%')
-plt.legend()
+plt.legend(loc=2)
 plt.show()
+'''
 
 ########## podpunkt b ###########
 '''
