@@ -1,0 +1,33 @@
+## Opis idei dzialania oraz kodu symulatora ataku double spending ##
+
+Funkcja przyjmuje dwa argumenty:
+n - liczba potwierdzen (nadbudowan blokow) potrzebnych by uznac transakcje za potwierdzona,
+q - prawdopodobienstwo wydobycia kolejnego bloku przez adwersarza; 0 < q < 0.5.
+
+Ustawiamy liczniki blokow wykopanych przez adwersarza i uczciwe wezly na zero.
+
+Wykonujemy pierwsza petle, ktora dziala dopoki liczba blokow wykopanych przez uczciwe wezly
+nie bedzie rowna n. Do tego momentu nie mozemy przerwac kopania. Kopiemy blok adwersarza z 
+prawdop. q, w przeciwnym razie blok wykopuja uczciwe wezly (//byc moze lepiej byloby kopac
+niezaleznie, tzn. losowac dwie liczby osobno dla adwersarza i uczciwych wezlow).
+
+Gdy liczba blokow wykopanych przez uczciwe wezly wyniesie n, transakcja zostaje potwierdzona.
+Wtedy zaczynamy druga petle, losujaca kto wykopuje blok (//ponownie warto byloby sprawdzic
+kopanie niezalezne). Petla przerywa sie, gdy liczba blokow adwersarza zrowna sie z liczba blokow
+uczciwych wezlow (lub ja wyprzedzila zanim uczciwe wezly osiagnely n blokow). Wowczas atak sie
+powiodl i zwracamy 1. Jesli liczba blokow uczciwych wezlow wyprzedzi liczbe blokow adwersarza o
+100, uznajemy ze atak sie nie powiodl i zwracamy 0.
+
+Dla roznych wartosci n i q wykonujemy funkcje 10000 razy, co pozwala oszacowac prawdopodobienstwo
+skutecznego ataku double spending. Stworzono wykresy P(n) przy ustalonym q (q = {0.1, 0.2, 0.3, 0.4, 0.5})
+oraz P(q) przy ustalonym n (n = {1, 3, 6, 12, 24, 48}), porownujac w drugim przypadku wyniki
+symulacji z analizami Nakamoto i Grunspana. Nie pojawily sie rozbieznosci, co pozwala wysnuc
+wniosek, iz prawdopodobnie cwiczenie wykonano poprawnie.
+
+Warto zauwazyc, iz przypadki n=0 i n=1 sa rownowazne. Dowod: gdy jako pierwszy wykopany zostanie blok
+uczciwych wezlow, w obydwu przypadkach mamy ta sama sytuacje, w ktorej transakcja jest potwierdzona
+i adwersarzowi brakuje jednego bloku do uczciwych wezlow. W drugim przypadku jako pierwszy wykopal
+adwersarz. Gdy n=0, atak juz sie powiodl, z kolei gdy n=1, adwersarz wygra, jesli tylko kiedykolwiek
+uczciwe wezly wykopia jeden blok. Z tego powodu wykresy P(n) przy ustalonym q zaczynaja sie od n=1,
+poniewaz przypadek n=0 jest identyczny.
+
