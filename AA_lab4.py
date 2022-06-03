@@ -54,6 +54,24 @@ plt.title('Porownanie analiz ataku double spending, n='+str(n))
 plt.legend()
 plt.show()
 '''
+
+######### podpunkt a2 #########
+P = 0.1 # 0.001, 0.01, 0.1
+for q in np.arange(0, 0.45, 0.01):
+    for n in range(1,150):
+        if Grunspan(n,q) < P:
+            plt.plot(q,n, color='g', marker='.', label='Grunspan' if q==0 else "")
+            break
+    for n in range(1,150):
+        if Nakamoto(n,q) < P:
+            plt.plot(q,n, color='orangered', marker='.', label='Nakamoto' if q==0 else "")
+            break
+plt.xlabel('q')
+plt.ylabel('n')
+plt.title('P(n,q) = '+str(P*100)+'%')
+plt.legend()
+plt.show()
+
 ########## podpunkt b ###########
 '''
 # wykres prawdop. ataku w zaleznosci od n przy ustalonym q
@@ -70,7 +88,9 @@ plt.title('Symulator ataku "double spending": wykres P(n), q = '+str(q))
 plt.ylim([0,100])
 plt.show()
 '''
+
 ########## podbunkt c ##########
+'''
 # wykresy prawdop. ataku w zaleznosci od q przy ustalonym n, porownanie analiz i symulacji
 n = 6
 for q in np.arange(0, 0.51, 0.01):
@@ -86,3 +106,4 @@ plt.ylabel('Prawdopodobienstwo skutecznego ataku [%]')
 plt.title('Atak double spending. Porownanie analiz i symulacji. P(q), n='+str(n))
 plt.legend()
 plt.show()
+'''
