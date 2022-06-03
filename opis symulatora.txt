@@ -24,10 +24,10 @@ oraz P(q) przy ustalonym n (n = {1, 3, 6, 12, 24, 48}), porownujac w drugim przy
 symulacji z analizami Nakamoto i Grunspana. Nie pojawily sie rozbieznosci, co pozwala wysnuc
 wniosek, iz prawdopodobnie cwiczenie wykonano poprawnie.
 
-Warto zauwazyc, iz przypadki n=0 i n=1 sa rownowazne. Dowod: gdy jako pierwszy wykopany zostanie blok
+Warto zauwazyc, iz przypadki n=0 i n=1 sa rownowazne. Dowod: Gdy jako pierwszy wykopany zostanie blok
 uczciwych wezlow, w obydwu przypadkach mamy ta sama sytuacje, w ktorej transakcja jest potwierdzona
 i adwersarzowi brakuje jednego bloku do uczciwych wezlow. W drugim przypadku jako pierwszy wykopal
-adwersarz. Gdy n=0, atak juz sie powiodl, z kolei gdy n=1, adwersarz wygra, jesli tylko kiedykolwiek
+adwersarz. Gdy n=0, atak juz sie powiodl. Z kolei gdy n=1, adwersarz wygra, jesli tylko kiedykolwiek
 uczciwe wezly wykopia jeden blok. Z tego powodu wykresy P(n) przy ustalonym q zaczynaja sie od n=1,
 poniewaz przypadek n=0 jest identyczny.
 
