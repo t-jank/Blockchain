@@ -93,7 +93,7 @@ plt.show()
 '''
 
 ########## podbunkt c ##########
-
+'''
 # wykresy prawdop. ataku w zaleznosci od q przy ustalonym n, porownanie analiz i symulacji
 n = 6
 for q in np.arange(0, 0.51, 0.01):
@@ -109,4 +109,5 @@ plt.ylabel('Prawdopodobienstwo skutecznego ataku [%]')
 plt.title('Atak double spending. Porownanie analiz i symulacji. P(q), n='+str(n))
 plt.legend()
 plt.show()
+'''
 
