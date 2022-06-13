@@ -30,7 +30,7 @@ def symulator_ataku(n,q):
         x = random.random()
         if x <= q:
             adw_counter += 1
-        else:
+        if x > q:
             ucz_counter += 1
     while ucz_counter - adw_counter < 100:
         if adw_counter >= ucz_counter:
@@ -38,7 +38,7 @@ def symulator_ataku(n,q):
         x = random.random()
         if x <= q:
             adw_counter += 1
-        else:
+        if x > q:
             ucz_counter += 1
     return 0 # atak sie nie powiodl
 

@@ -7,16 +7,14 @@ q - prawdopodobienstwo wydobycia kolejnego bloku przez adwersarza; 0 < q < 0.5.
 Ustawiamy liczniki blokow wykopanych przez adwersarza i uczciwe wezly na zero.
 
 Wykonujemy pierwsza petle, ktora dziala dopoki liczba blokow wykopanych przez uczciwe wezly
-nie bedzie rowna n. Do tego momentu nie mozemy przerwac kopania. Kopiemy blok adwersarza z 
-prawdop. q, w przeciwnym razie blok wykopuja uczciwe wezly (//byc moze lepiej byloby kopac
-niezaleznie, tzn. losowac dwie liczby osobno dla adwersarza i uczciwych wezlow).
+nie bedzie rowna n. Do tego momentu nie mozemy przerwac kopania. Kopiemy blok adwersarza z
+prawdop. q oraz niezaleznie blok uczciwych wezlow z prawdopod. 1-q.
 
 Gdy liczba blokow wykopanych przez uczciwe wezly wyniesie n, transakcja zostaje potwierdzona.
-Wtedy zaczynamy druga petle, losujaca kto wykopuje blok (//ponownie warto byloby sprawdzic
-kopanie niezalezne). Petla przerywa sie, gdy liczba blokow adwersarza zrowna sie z liczba blokow
-uczciwych wezlow (lub ja wyprzedzila zanim uczciwe wezly osiagnely n blokow). Wowczas atak sie
-powiodl i zwracamy 1. Jesli liczba blokow uczciwych wezlow wyprzedzi liczbe blokow adwersarza o
-100, uznajemy ze atak sie nie powiodl i zwracamy 0.
+Wtedy zaczynamy druga petle, losujaca czy wykopywanie blokow. Petla przerywa sie, gdy liczba
+blokow adwersarza zrowna sie z liczba blokow uczciwych wezlow (lub ja wyprzedzila zanim uczciwe
+wezly osiagnely n blokow). Wowczas atak sie powiodl i zwracamy 1. Jesli liczba blokow uczciwych
+wezlow wyprzedzi liczbe blokow adwersarza o 100, uznajemy ze atak sie nie powiodl i zwracamy 0.
 
 Dla roznych wartosci n i q wykonujemy funkcje 10000 razy, co pozwala oszacowac prawdopodobienstwo
 skutecznego ataku double spending. Stworzono wykresy P(n) przy ustalonym q (q = {0.1, 0.2, 0.3, 0.4, 0.5})
