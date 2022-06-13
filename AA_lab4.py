@@ -30,7 +30,7 @@ def symulator_ataku(n,q):
         x = random.random()
         if x <= q:
             adw_counter += 1
-        if x > q:
+        else:
             ucz_counter += 1
     while ucz_counter - adw_counter < 100:
         if adw_counter >= ucz_counter:
@@ -38,7 +38,7 @@ def symulator_ataku(n,q):
         x = random.random()
         if x <= q:
             adw_counter += 1
-        if x > q:
+        else:
             ucz_counter += 1
     return 0 # atak sie nie powiodl
 
@@ -93,7 +93,7 @@ plt.show()
 '''
 
 ########## podbunkt c ##########
-'''
+
 # wykresy prawdop. ataku w zaleznosci od q przy ustalonym n, porownanie analiz i symulacji
 n = 6
 for q in np.arange(0, 0.51, 0.01):
@@ -109,4 +109,4 @@ plt.ylabel('Prawdopodobienstwo skutecznego ataku [%]')
 plt.title('Atak double spending. Porownanie analiz i symulacji. P(q), n='+str(n))
 plt.legend()
 plt.show()
-'''
+
